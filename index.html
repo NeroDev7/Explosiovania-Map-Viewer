@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explosiovania Map</title>
+<meta name="description" content="Interactive Explosiovania map with every upgrade, ability, key, door and race. Load your save to see what you are missing.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Explosiovania Map</h1>
+  <div class="save-box">
+    <button id="btnLoad" title="Load your save file to mark what you already have">Load save…</button>
+    <input type="file" id="saveFile" accept=".save" hidden>
+    <span id="saveInfo" class="muted">No save loaded</span>
+    <button id="btnClear" hidden title="Forget the loaded save">✕</button>
+    <button id="btnHelp" title="Where is my save file?">?</button>
+  </div>
+</header>
+
+<div id="help" hidden>
+  <b>Where is my save?</b> Press <kbd>Win</kbd>+<kbd>R</kbd>, paste
+  <code>%APPDATA%\Godot\app_userdata\Explosiovania\saves</code> and pick <code>save0.save</code> (slot 1), <code>save1.save</code> (slot 2)…
+  You can also drag the file onto the page.<br>
+  The file is read in your browser only. Nothing is uploaded, and the page never writes to your save.
+  <button id="btnHelpClose">OK</button>
+</div>
+
+<main>
+  <aside id="left">
+    <div id="total"></div>
+    <h2>Regions</h2>
+    <ul id="regionList"></ul>
+    <h2>Show</h2>
+    <div id="catFilters"></div>
+    <label class="chk"><input type="checkbox" id="hideCollected"> Hide collected</label>
+    <label class="chk"><input type="checkbox" id="showNumbers" checked> Numbers on markers</label>
+    <label class="chk"><input type="checkbox" id="showPlayer" checked> Last saved player position</label>
+    <p class="credits muted">Fan-made map, not affiliated with the developer. Positions come from the game files. Markers marked “approximate” are in the right room, but the spot inside the room is estimated.</p>
+  </aside>
+
+  <div id="mapWrap">
+    <canvas id="map"></canvas>
+    <div id="tooltip" hidden></div>
+    <div id="mapBar">
+      <button id="btnFit">Fit</button>
+      <select id="regionSel" aria-label="Region"></select>
+      <span class="muted hint">Drag to pan · wheel / pinch to zoom · click a marker for details · click a region name to go there</span>
+    </div>
+    <div id="toast" hidden></div>
+    <div id="drop" hidden>Drop your .save file</div>
+  </div>
+
+  <aside id="right">
+    <div id="detail" hidden></div>
+    <div id="itemList"></div>
+  </aside>
+</main>
+<script src="world.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
